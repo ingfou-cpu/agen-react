@@ -26,9 +26,15 @@
                                 <small style="color: var(--ka-shadow); font-family: 'JetBrains Mono', monospace;">{% trans "Prix par personne" %}</small>
                                 <div style="font-size: 2rem; font-weight: 500; color: var(--eb-primary); font-family: 'Inter', sans-serif;">{{ destination.price }} <small style="font-size: 1rem;">DA</small></div>
                             </div>
-                            <a href="{% url 'checkout_destination' destination.id %}" class="btn" style="background: var(--eb-gradient-primary); color: #fff; border: none; border-radius: 9999px; padding: 16px 48px; font-weight: 500; font-size: 1.05rem; font-family: 'Inter', sans-serif;">
-                                <i class="fas fa-lock me-2"></i>{% trans "Payer maintenant" %}
-                            </a>
+                            <form method="POST" action="{% url 'checkout_destination' destination.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="customer_name" value="{{ request.user.get_full_name|default:request.user.username }}">
+                                <input type="hidden" name="customer_email" value="{{ request.user.email }}">
+                                <input type="hidden" name="customer_phone" value="">
+                                <button type="submit" class="btn" style="background: var(--eb-gradient-primary); color: #fff; border: none; border-radius: 9999px; padding: 16px 48px; font-weight: 500; font-size: 1.05rem; font-family: 'Inter', sans-serif;">
+                                    <i class="fas fa-lock me-2"></i>{% trans "Payer maintenant" %}
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

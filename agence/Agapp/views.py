@@ -730,16 +730,27 @@ def stripe_webhook(request):
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
     webhook_secret = settings.STRIPE_WEBHOOK_SECRET
 
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, webhook_secret
-        )
-    except ValueError as e:
-        logger.error(f"Invalid payload: {str(e)}")
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        logger.error(f"Invalid signature: {str(e)}")
-        return HttpResponse(status=400)
+    # En développement uniquement (DEBUG) et sans webhook secret configuré,
+    # on accepte le payload brut pour permettre un test local sans `stripe listen`.
+    # Jamais activé en production : DEBUG est faux et/ou un secret est présent.
+    if settings.DEBUG and not webhook_secret:
+        import json
+        try:
+            event = json.loads(payload)
+        except ValueError as e:
+            logger.error(f"Invalid payload: {str(e)}")
+            return HttpResponse(status=400)
+    else:
+        try:
+            event = stripe.Webhook.construct_event(
+                payload, sig_header, webhook_secret
+            )
+        except ValueError as e:
+            logger.error(f"Invalid payload: {str(e)}")
+            return HttpResponse(status=400)
+        except stripe.error.SignatureVerificationError as e:
+            logger.error(f"Invalid signature: {str(e)}")
+            return HttpResponse(status=400)
 
     event_type = event['type']
     logger.info(f"Received Stripe event: {event_type}")
