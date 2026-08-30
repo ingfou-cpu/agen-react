@@ -2,7 +2,7 @@ django
 django-rest-framework
 requests
 django-cors-headers
-dotenv
+python-dotenv
 Pillow
 stripe
 polib
