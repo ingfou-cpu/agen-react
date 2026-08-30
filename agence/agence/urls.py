@@ -15,11 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from . import settings
 from django.conf.urls.static import static
+from . import spa_views
+
+# L'attrape-tout SPA doit venir AVANT les includes Django (Agapp, weatherapp)
+# pour que le frontend React prenne le dessus sur les templates legacy.
+# Les préfixes exclus restent servis par Django (API, admin, media/static
+# gérés par PythonAnywhere, Stripe, pages de confirmation).
+_spa_exclusions = (
+    r'^(?!'
+    r'api/|admin/|media/|static/|assets/|api-auth/|'
+    r'payment/checkout/|payment/webhook/|'
+    r'booking/confirmation/|circuit/confirmation/|booking/recap/|'
+    r'lang/|testimonial_form/|history/'
+    r').*$'
+)
 
 urlpatterns = [
+    re_path(_spa_exclusions, spa_views.spa_index, name='spa_index'),
     path('admin/', admin.site.urls),
     path('', include('Agapp.urls')),
     path('weather/', include('weatherapp.urls'), name='weather_index'),
