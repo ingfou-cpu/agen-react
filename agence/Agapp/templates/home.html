@@ -1,0 +1,460 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+        <!-- Masthead / Hero -->
+        <header class="masthead">
+            <div class="ka-hero-pattern"></div>
+            <div class="container px-4 px-lg-5 h-100 d-flex align-items-center">
+                <div class="row w-100 gx-5 align-items-center">
+                    <div class="col-lg-7">
+                        <div class="hero-badge">
+                            <span class="hero-badge-dot"></span>
+                            {% trans "Bienvenue chez" %}
+                        </div>
+                        <h1 class="hero-title">El Bayadh Travels</h1>
+                        <p class="hero-subtitle">{% trans "Explorez le monde avec nos offres de voyage exceptionnelles !" %}</p>
+                        <div class="hero-actions">
+                            <a href="#projects" class="hero-btn hero-btn-primary">
+                                <span>{% trans "Découvrir nos destinations" %}</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="{% url 'circuit' %}" class="hero-btn hero-btn-outline">
+                                <i class="fas fa-map"></i>
+                                <span>{% trans "Voir les circuits" %}</span>
+                            </a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="hero-stat-value">50+</span>
+                                <span class="hero-stat-label">{% trans "Destinations" %}</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-value">1000+</span>
+                                <span class="hero-stat-label">{% trans "Voyageurs" %}</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-value">15+</span>
+                                <span class="hero-stat-label">{% trans "Circuits" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+                        <div class="hero-showcase">
+                            <div class="ksar-frame">
+                                <div class="ksar-frame-arch">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="ksar-frame-content">
+                                    <div class="ksar-icon"><i class="fas fa-sun"></i></div>
+                                    <h4>{% trans "Sahara Algérien" %}</h4>
+                                    <p>{% trans "Des dunes infinies aux oasis cachées, partez à la découverte du plus grand désert du monde." %}</p>
+                                    <div class="ksar-features">
+                                        <div class="ksar-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>{% trans "Circuits guidés" %}</span>
+                                        </div>
+                                        <div class="ksar-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>{% trans "Hébergement nomade" %}</span>
+                                        </div>
+                                        <div class="ksar-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>{% trans "Transport inclus" %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Destinations Carousel -->
+        <section style="padding: 4rem 0; background: linear-gradient(to right, var(--eb-dark), #1a3c34, var(--eb-dark));">
+            <div class="container px-4 px-lg-5">
+                <div class="section-title">
+                    <h2 style="color: var(--ka-sand-light);">{% trans "Destinations et lieux Touristiques" %}</h2>
+                    <p style="color: var(--ka-shadow);">{% trans "Découvrez nos destinations soigneusement sélectionnées pour des expériences inoubliables" %}</p>
+                </div>
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
+                    <div class="carousel-indicators">
+                        {% for Destinations in Destination %}
+                            <button type="button"
+                                    data-bs-target="#carouselExampleCaptions"
+                                    data-bs-slide-to="{{ forloop.counter0 }}"
+                                    {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                                    aria-label="Slide {{ forloop.counter }}">
+                            </button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner">
+                        {% for Destinations in Destination %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <a href="{% url 'reselieuChoisi' Destinations.id %}">
+                                    <img src="{{ Destinations.image.url }}" class="d-block w-100 carousel-img-clickable" alt="{{ Destinations.name }}">
+                                </a>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="font-family: 'Inter', sans-serif; font-weight: 500;"><a href="{% url 'reselieuChoisi' Destinations.id %}" class="text-white text-decoration-none">{{ Destinations.name }}</a></h5>
+                                    <p style="font-family: 'Playfair Display', serif;">{{ Destinations.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destinations Grid -->
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5">
+                <div class="section-title">
+                    <h2>{% trans "Nos Destinations" %}</h2>
+                    <p>{% trans "Chaque destination est une nouvelle aventure qui vous attend" %}</p>
+                </div>
+                <div class="destination-grid">
+                    {% for Destinations in Destination %}
+                    <div class="destination-card">
+                        <img src="{{ Destinations.image.url }}" class="card-img" alt="{{ Destinations.name }}">
+                        <div class="card-body">
+                            <h4>{{ Destinations.name }}</h4>
+                            <p>{{ Destinations.description|truncatechars:200 }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'reselieuChoisi' Destinations.id %}" class="btn-destination">
+                                <i class="fas fa-check-circle"></i> {% trans "Choisir cette destination" %}
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather Section -->
+        <style>
+            .weather-section-2 {
+                background: var(--ka-dark-2);
+                padding: 80px 0;
+                position: relative;
+                overflow: hidden;
+            }
+            .weather-section-2::before {
+                content: '';
+                position: absolute;
+                top: -50%; left: -50%;
+                width: 200%; height: 200%;
+                background: radial-gradient(circle, rgba(201,123,58,0.04) 0%, transparent 60%);
+                animation: weatherPulse 8s ease-in-out infinite;
+            }
+            @keyframes weatherPulse {
+                0%, 100% { transform: scale(1); opacity: 0.5; }
+                50% { transform: scale(1.1); opacity: 1; }
+            }
+            .weather-title-2 {
+                font-size: 2.4em; font-weight: 500; color: var(--ka-sand-light);
+                text-align: center; margin-bottom: 8px;
+                font-family: 'Inter', sans-serif;
+                letter-spacing: 0;
+            }
+            .weather-subtitle-2 {
+                text-align: center; color: var(--ka-shadow);
+                font-size: 1.05em; margin-bottom: 40px;
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-search-box {
+                max-width: 520px; margin: 0 auto 40px;
+                display: flex; gap: 0;
+                background: var(--ka-glass-bg);
+                backdrop-filter: blur(12px);
+                border-radius: 9999px;
+                border: 1px solid var(--ka-glass-border);
+                padding: 6px;
+                transition: all 0.3s ease;
+            }
+            .weather-search-box:focus-within {
+                background: var(--ka-light);
+                border-color: rgba(201,123,58,0.3);
+                box-shadow: 0 8px 32px rgba(42,28,10,0.12);
+            }
+            .weather-search-box input {
+                flex: 1; border: none; background: transparent;
+                color: var(--ka-sand-light); padding: 14px 24px; font-size: 1.05em;
+                outline: none; font-family: 'Inter', sans-serif;
+            }
+            .weather-search-box input::placeholder { color: var(--ka-shadow); }
+            .weather-search-box button {
+                background: var(--ka-gradient-primary);
+                color: #fff; border: none; padding: 14px 32px;
+                border-radius: 9999px; font-weight: 500; font-size: 1em;
+                cursor: pointer; transition: all 0.3s ease;
+                display: flex; align-items: center; gap: 8px;
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-search-box button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 20px rgba(201,123,58,0.4);
+            }
+            .weather-main-card {
+                background: var(--ka-glass-bg);
+                backdrop-filter: blur(16px);
+                border-radius: var(--ka-radius-md);
+                border: 1px solid var(--ka-glass-border);
+                padding: 40px;
+                max-width: 600px; margin: 0 auto;
+                text-align: center;
+                box-shadow: var(--ka-shadow-md);
+                transition: transform 0.3s ease;
+            }
+            .weather-main-card:hover { transform: translateY(-4px); }
+            .weather-city-name {
+                font-size: 1.4em; font-weight: 500; color: var(--ka-sand-light);
+                margin-bottom: 4px;
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-city-country {
+                font-size: 0.9em; color: var(--ka-shadow);
+                margin-bottom: 16px;
+                font-family: 'JetBrains Mono', monospace;
+            }
+            .weather-icon-main {
+                width: 120px; height: 120px;
+                filter: drop-shadow(0 4px 12px rgba(42,28,10,0.2));
+                margin: 8px 0;
+            }
+            .weather-temp-main {
+                font-size: 4em; font-weight: 500; color: var(--ka-sand-light);
+                line-height: 1.04; margin: 8px 0;
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-desc-main {
+                font-size: 1.15em; color: var(--ka-shadow);
+                margin-bottom: 28px; text-transform: capitalize;
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-stats {
+                display: flex; justify-content: center; gap: 32px;
+                flex-wrap: wrap;
+            }
+            .weather-stat {
+                text-align: center; min-width: 90px;
+            }
+            .weather-stat-icon {
+                font-size: 1.6em; margin-bottom: 4px;
+            }
+            .weather-stat-label {
+                font-size: 0.75em; color: var(--ka-shadow);
+                font-family: 'JetBrains Mono', monospace;
+                letter-spacing: 0.05em;
+                margin-bottom: 2px;
+            }
+            .weather-stat-value {
+                font-size: 1.2em; font-weight: 500; color: var(--ka-sand-light);
+                font-family: 'Inter', sans-serif;
+            }
+            .weather-error-box {
+                max-width: 520px; margin: 0 auto 24px;
+                background: rgba(231,76,60,0.15);
+                border: 1px solid rgba(231,76,60,0.3);
+                border-radius: var(--ka-radius-md);
+                padding: 16px 24px;
+                color: #f5b7b1; text-align: center;
+                font-weight: 500;
+            }
+            .forecast-title-2 {
+                font-size: 1.3em; font-weight: 500; color: var(--ka-sand-light);
+                text-align: center; margin-top: 40px; margin-bottom: 24px;
+                font-family: 'Inter', sans-serif;
+            }
+            .forecast-scroll {
+                display: flex; gap: 14px; overflow-x: auto;
+                padding: 4px 0 16px;
+                max-width: 900px; margin: 0 auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            .forecast-scroll::-webkit-scrollbar { height: 4px; }
+            .forecast-scroll::-webkit-scrollbar-track { background: var(--ka-glass-bg); border-radius: 4px; }
+            .forecast-scroll::-webkit-scrollbar-thumb { background: var(--ka-shadow); border-radius: 4px; opacity: 0.3; }
+            .forecast-day-2 {
+                flex: 0 0 115px;
+                background: var(--ka-glass-bg);
+                backdrop-filter: blur(8px);
+                border-radius: var(--ka-radius-md);
+                border: 1px solid var(--ka-glass-border);
+                padding: 20px 12px;
+                text-align: center;
+                scroll-snap-align: start;
+                transition: all 0.3s ease;
+            }
+            .forecast-day-2:hover {
+                background: var(--ka-light);
+                transform: translateY(-4px);
+                border-color: rgba(201,123,58,0.2);
+            }
+            .forecast-day-2.today {
+                background: linear-gradient(135deg, rgba(201,123,58,0.12), rgba(212,163,115,0.12));
+                border-color: rgba(201,123,58,0.3);
+            }
+            .forecast-day-label {
+                font-size: 0.85em; font-weight: 500; color: var(--ka-sand-light);
+                margin-bottom: 2px;
+                font-family: 'Inter', sans-serif;
+            }
+            .forecast-day-date {
+                font-size: 0.72em; color: var(--ka-shadow);
+                margin-bottom: 10px;
+                font-family: 'JetBrains Mono', monospace;
+            }
+            .forecast-day-emoji {
+                font-size: 2em; margin-bottom: 8px;
+                display: block;
+            }
+            .forecast-day-desc {
+                font-size: 0.7em; color: var(--ka-shadow);
+                margin-bottom: 10px;
+                line-height: 1.3;
+                min-height: 28px;
+            }
+            .forecast-day-temps {
+                display: flex; justify-content: center; gap: 6px;
+                align-items: baseline;
+            }
+            .forecast-day-max {
+                font-size: 1.15em; font-weight: 500; color: var(--ka-sand-light);
+                font-family: 'Inter', sans-serif;
+            }
+            .forecast-day-min {
+                font-size: 0.85em; font-weight: 400; color: var(--ka-shadow);
+            }
+        </style>
+
+        <section class="weather-section-2" id="weather">
+            <div class="container px-4 px-lg-5 position-relative" style="z-index: 1;">
+                <h2 class="weather-title-2">{% trans "Météo en direct" %}</h2>
+                <p class="weather-subtitle-2">{% trans "Consultez les conditions météorologiques de n'importe quelle ville" %}</p>
+
+                <!-- Search -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="weather-search-box">
+                        <label for="weather-city" class="visually-hidden">{% trans "Ville" %}</label>
+                        <input type="text" name="city" id="weather-city" placeholder="{% trans 'Rechercher une ville...' %}" value="{{ request.POST.city }}" autocomplete="off">
+                        <button type="submit"><i class="fas fa-search"></i> {% trans "Chercher" %}</button>
+                    </div>
+                </form>
+
+                {% if weather_error %}
+                <div class="weather-error-box">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ weather_error }}
+                </div>
+                {% endif %}
+
+                {% if weather_data %}
+                <!-- Current Weather -->
+                <div class="weather-main-card">
+                    <div class="weather-city-name"><i class="fas fa-map-marker-alt" style="color:#e74c3c; margin-right:6px;"></i>{{ weather_data.city }}</div>
+                    <div class="weather-city-country">{% trans "Météo actuelle" %}</div>
+                    <img src="https://openweathermap.org/img/wn/{{ weather_data.icon }}@4x.png" alt="{{ weather_data.description }}" class="weather-icon-main">
+                    <div class="weather-temp-main">{{ weather_data.temperature }}°</div>
+                    <div class="weather-desc-main">{{ weather_data.description }}</div>
+                    <div class="weather-stats">
+                        <div class="weather-stat">
+                            <div class="weather-stat-icon">💧</div>
+                            <div class="weather-stat-label">{% trans "Humidité" %}</div>
+                            <div class="weather-stat-value">{{ weather_data.humidity }}%</div>
+                        </div>
+                        <div class="weather-stat">
+                            <div class="weather-stat-icon">🔽</div>
+                            <div class="weather-stat-label">{% trans "Pression" %}</div>
+                            <div class="weather-stat-value">{{ weather_data.pressure }} hPa</div>
+                        </div>
+                        <div class="weather-stat">
+                            <div class="weather-stat-icon">☁️</div>
+                            <div class="weather-stat-label">{% trans "Conditions" %}</div>
+                            <div class="weather-stat-value" style="font-size:0.95em;">{{ weather_data.description }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if forecast_7days %}
+                <!-- 7-Day Forecast -->
+                <h3 class="forecast-title-2"><i class="fas fa-calendar-week me-2"></i>{% trans "Prévisions — 7 jours" %}</h3>
+                <div class="forecast-scroll">
+                    {% for day in forecast_7days %}
+                    <div class="forecast-day-2 {% if forloop.first %}today{% endif %}">
+                        <div class="forecast-day-label">{{ day.day_label }}</div>
+                        <div class="forecast-day-date">{{ day.date_display }}</div>
+                        <span class="forecast-day-emoji">{{ day.emoji }}</span>
+                        <div class="forecast-day-desc">{{ day.description }}</div>
+                        <div class="forecast-day-temps">
+                            <span class="forecast-day-max">{{ day.temp_max }}°</span>
+                            <span class="forecast-day-min">{{ day.temp_min }}°</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Contact-->
+        <section class="contact-section" id="contact">
+            <div class="container px-4 px-lg-5">
+                <div class="section-title">
+                    <h2>{% trans "Contactez-nous" %}</h2>
+                    <p>{% trans "Nous sommes à votre écoute pour organiser votre prochain voyage" %}</p>
+                </div>
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt mb-2"></i>
+                                <h4 class="text-uppercase m-0">{% trans "Adresse" %}</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small">{% trans "El Bayadh, Algérie" %}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope mb-2"></i>
+                                <h4 class="text-uppercase m-0">{% trans "Courriel" %}</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small"><a href="mailto:contact@elbayadhtravels.dz">contact@elbayadhtravels.dz</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt mb-2"></i>
+                                <h4 class="text-uppercase m-0">{% trans "Téléphone" %}</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small">+213 (0) 00 00 00 00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social d-flex justify-content-center">
+                    <a href="#!"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#!"><i class="fab fa-instagram"></i></a>
+                    <a href="#!"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#!"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </section>
+{% endblock %}

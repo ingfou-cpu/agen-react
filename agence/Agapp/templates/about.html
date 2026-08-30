@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}   
+
+{% block content %}
+
+        <!-- About-->
+        <section class="about-section text-center" id="about">
+            <video class="about-video-bg" src="{% static 'assets/img/elbayadh.mp4' %}" playsinline autoplay muted loop></video>
+            <div class="about-overlay"></div>
+            <div class="container px-4 px-lg-5 about-content">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <em>
+                        <h1 class="text-white mb-4">{% trans "El bayadh travels" %}</h1></em>
+                        <p class="text-white-50">
+                            {% blocktrans %}L'agence El Bayadh Travels est un acteur local du tourisme situé dans la wilaya d'El Bayadh, en Algérie. Elle se spécialise dans l'accompagnement des voyageurs pour des séjours nationaux et internationaux, offrant une gamme complète de services incluant la réservation de billets d'avion, l'organisation de circuits touristiques, la location de voitures, et la réservation d'hôtels. L'agence s'engage à fournir des expériences de voyage personnalisées et mémorables, en mettant l'accent sur la satisfaction du client et en proposant des offres compétitives pour répondre aux besoins variés des voyageurs. Avec une équipe dédiée et une connaissance approfondie du secteur touristique, El Bayadh Travels vise à être le partenaire de confiance pour tous les projets de voyage, qu'ils soient d'affaires ou de loisirs.{% endblocktrans %}
+                            <!--<a href="https://startbootstrap.com/theme/grayscale/">the preview page.</a>-->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

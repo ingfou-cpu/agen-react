@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+<style>
+    :root {
+        --eb-primary: #6d5dfb;
+        --eb-dark: #eef0ff;
+        --ka-shadow: #9aa3c0;
+        --eb-light: #1c2237;
+        --eb-light-2: #141929;
+        --eb-gradient-primary: linear-gradient(135deg, #6d5dfb, #4A3F9E);
+        --eb-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.35);
+        --eb-shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+    #comment-form .form-control {
+        background: var(--eb-light-2);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: var(--eb-dark);
+    }
+    #comment-form .form-control::placeholder { color: var(--ka-shadow); }
+    #comment-form .form-control:focus {
+        border-color: var(--eb-primary);
+        box-shadow: 0 0 0 0.2rem rgba(109,93,251,0.15);
+    }
+</style>
+<section style="padding: 8rem 0 5rem; background: var(--eb-light);">
+    <div class="container px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if article.image %}
+                <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 24px; margin-bottom: 2rem;">
+                {% endif %}
+                <small style="color: var(--eb-primary); font-weight: 500; font-family: 'JetBrains Mono', monospace;">{{ article.created_at|date:"d F Y" }} &middot; {% trans "Par" %} {{ article.author }}</small>
+                <h1 style="color: var(--eb-dark); font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0.5rem 0 1.5rem; font-family: 'Inter', sans-serif;">{{ article.title }}</h1>
+                <div style="color: var(--ka-shadow); line-height: 1.8; font-size: 1.05rem; font-family: 'Playfair Display', serif;">
+                    {{ article.content|linebreaks }}
+                </div>
+                <a href="{% url 'blog_list' %}" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 2rem; color: var(--eb-primary); text-decoration: none; font-weight: 500; font-family: 'Inter', sans-serif;">
+                    <i class="fas fa-arrow-left"></i> {% trans "Retour aux articles" %}
+                </a>
+
+                <hr style="margin: 2.5rem 0 2rem; border-color: rgba(255,255,255,0.08);">
+
+                <div id="comments">
+                    <h2 style="color: var(--eb-dark); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1.4rem;">{% trans "Commentaires" %} ({{ comments|length }})</h2>
+                    {% for comment in comments %}
+                    <div style="background: var(--eb-light-2); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem;">
+                        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 0.4rem; flex-wrap: wrap;">
+                            <span style="font-weight: 600; color: var(--eb-primary); font-family: 'JetBrains Mono', monospace;">{{ comment.author }}</span>
+                            <small style="color: var(--ka-shadow); font-family: 'Playfair Display', serif;">{{ comment.created_at|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        <p style="color: var(--eb-dark); margin: 0; line-height: 1.7; font-family: 'Playfair Display', serif;">{{ comment.body|linebreaksbr }}</p>
+                    </div>
+                    {% empty %}
+                    <p style="color: var(--ka-shadow); margin-top: 1rem; font-family: 'Playfair Display', serif;">{% trans "Aucun commentaire pour le moment. Soyez le premier à partager votre avis !" %}</p>
+                    {% endfor %}
+                </div>
+
+                <div id="comment-form" style="margin-top: 2.5rem; background: var(--eb-light-2); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.75rem;">
+                    <h3 style="color: var(--eb-dark); font-weight: 500; font-size: 1.15rem; font-family: 'Inter', sans-serif; margin-bottom: 1.25rem;">{% trans "Laisser un commentaire" %}</h3>
+                    <form method="post" action="{% url 'blog_detail' article.slug %}#comments">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.author.id_for_label }}" class="form-label" style="color: var(--eb-dark); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">{{ form.author.label }}</label>
+                                {{ form.author }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.email.id_for_label }}" class="form-label" style="color: var(--eb-dark); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">{{ form.email.label }}</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.body.id_for_label }}" class="form-label" style="color: var(--eb-dark); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">{{ form.body.label }}</label>
+                                {{ form.body }}
+                            </div>
+                        </div>
+                        {% if form.errors %}
+                        <div class="mt-2">
+                            {% for field in form %}{% for error in field.errors %}<p style="color: #e5484d; margin: 0; font-size: 0.85rem;">{{ error }}</p>{% endfor %}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <button type="submit" class="btn mt-3" style="background: var(--eb-gradient-primary); color: #fff; border: none; border-radius: 9999px; padding: 0.6rem 1.75rem; font-weight: 500; font-family: 'Inter', sans-serif;">{% trans "Envoyer" %}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div style="background: var(--eb-light); border-radius: 8px; padding: 1.5rem; box-shadow: var(--eb-shadow-sm); position: sticky; top: 100px; border: 1px solid rgba(255,255,255,0.06);">
+                    {% if article.destination %}
+                    <div style="margin-bottom: 1.5rem;">
+                        <h5 style="color: var(--eb-dark); font-weight: 500; margin-bottom: 0.8rem; font-family: 'Inter', sans-serif;">{% trans "Destination liée" %}</h5>
+                        <a href="{% url 'reselieuChoisi' article.destination.id %}" style="color: var(--eb-primary); text-decoration: none; font-weight: 500; font-family: 'Inter', sans-serif;">
+                            {{ article.destination.name }} <i class="fas fa-arrow-right ms-1" style="font-size: 0.75rem;"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                    <h5 style="color: var(--eb-dark); font-weight: 500; margin-bottom: 0.8rem; font-family: 'Inter', sans-serif;">{% trans "Articles récents" %}</h5>
+                    {% for recent in recents %}
+                    <a href="{% url 'blog_detail' recent.slug %}" style="text-decoration: none; display: block; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                        <span style="color: var(--eb-dark); font-weight: 500; font-size: 0.9rem; font-family: 'Inter', sans-serif;">{{ recent.title }}</span>
+                        <small style="color: var(--ka-shadow); display: block; font-family: 'Playfair Display', serif;">{{ recent.created_at|date:"d/m/Y" }}</small>
+                    </a>
+                    {% empty %}
+                    <p style="color: var(--ka-shadow); font-size: 0.85rem;">{% trans "Aucun article récent." %}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if messages %}
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+    {% for message in messages %}
+    <div class="alert alert-dismissible fade show d-flex align-items-center gap-2" role="alert" style="min-width: 280px; max-width: 92vw; background: var(--eb-light); border: 1px solid rgba(255,255,255,0.08); border-inline-start: 4px solid {% if message.tags == 'error' %}#e5484d{% else %}var(--eb-primary){% endif %}; border-radius: 12px; box-shadow: var(--eb-shadow-lg); color: var(--eb-dark); font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;">
+        <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}" style="color: {% if message.tags == 'error' %}#e5484d{% else %}var(--eb-primary){% endif %};"></i>
+        <span style="font-weight: 500; font-size: 0.95rem;">{{ message }}</span>
+        <button type="button" class="btn-close btn-close-white ms-auto" style="font-size: 0.7rem;" data-bs-dismiss="alert" aria-label="{% trans 'Fermer' %}"></button>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.toast-container [role="alert"]').forEach(function (t) {
+            setTimeout(function () {
+                if (window.bootstrap && bootstrap.Alert) {
+                    bootstrap.Alert.getOrCreateInstance(t).close();
+                } else {
+                    t.style.transition = 'opacity 0.4s';
+                    t.style.opacity = '0';
+                    setTimeout(function () { t.remove(); }, 400);
+                }
+            }, 6000);
+        });
+    });
+</script>
+{% endif %}
+{% endblock %}

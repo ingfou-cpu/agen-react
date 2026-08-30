@@ -1,0 +1,378 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --c-copper: 201 123 58;
+    --c-copper-light: 224 161 105;
+    --c-copper-dark: 160 95 40;
+    --c-forest: 35 77 66;
+    --c-forest-dark: 23 51 44;
+    --c-forest-darker: 15 36 31;
+    --c-forest-light: 47 104 89;
+    --c-sand: 232 220 200;
+    --c-sand-light: 245 239 227;
+    --c-sand-dark: 203 183 154;
+    --c-gold: 212 175 55;
+    --c-cream: 250 247 240;
+    --c-accent: 184 80 66;
+    --c-accent-light: 210 120 100;
+    --c-accent-dark: 150 60 48;
+  }
+
+  /* Home V2 — Terres Touareg palette (scoped to the V2 page) */
+  .home-v2-terres {
+    --c-cream: 255 250 245;
+    --c-sand-light: 253 247 240;
+    --c-sand: 240 230 214;
+    --c-sand-dark: 216 205 196;
+    --c-forest: 130 32 32;
+    --c-forest-dark: 88 17 17;
+    --c-forest-darker: 68 10 10;
+    --c-forest-light: 165 60 58;
+    --c-copper: 75 187 188;
+    --c-copper-light: 120 210 211;
+    --c-copper-dark: 45 145 146;
+    --c-gold: 210 168 96;
+    --c-accent: 205 150 78;
+    --c-accent-light: 224 176 112;
+    --c-accent-dark: 176 120 58;
+  }
+
+  html[data-variant='zellige'] {
+    --c-copper: 201 162 39;
+    --c-copper-light: 230 196 90;
+    --c-copper-dark: 154 123 28;
+    --c-forest: 29 90 78;
+    --c-forest-dark: 20 63 56;
+    --c-forest-darker: 11 42 37;
+    --c-forest-light: 42 122 104;
+    --c-sand: 236 223 198;
+    --c-sand-light: 247 241 227;
+    --c-sand-dark: 203 183 148;
+    --c-gold: 212 175 55;
+    --c-cream: 248 244 233;
+    --c-accent: 184 80 66;
+    --c-accent-light: 210 120 100;
+    --c-accent-dark: 150 60 48;
+  }
+
+  html[data-variant='dunes'] {
+    --c-copper: 196 106 63;
+    --c-copper-light: 224 141 95;
+    --c-copper-dark: 150 80 44;
+    --c-forest: 107 74 53;
+    --c-forest-dark: 74 51 37;
+    --c-forest-darker: 46 31 22;
+    --c-forest-light: 138 99 80;
+    --c-sand: 234 219 195;
+    --c-sand-light: 246 238 224;
+    --c-sand-dark: 205 179 147;
+    --c-gold: 217 160 91;
+    --c-cream: 250 244 234;
+    --c-accent: 184 80 66;
+    --c-accent-light: 210 120 100;
+    --c-accent-dark: 150 60 48;
+  }
+
+  html[data-variant='arabesque'] {
+    --c-copper: 169 132 47;
+    --c-copper-light: 201 167 78;
+    --c-copper-dark: 125 97 31;
+    --c-forest: 31 93 92;
+    --c-forest-dark: 22 64 63;
+    --c-forest-darker: 12 40 40;
+    --c-forest-light: 44 120 117;
+    --c-sand: 233 226 210;
+    --c-sand-light: 246 242 232;
+    --c-sand-dark: 197 188 166;
+    --c-gold: 176 141 47;
+    --c-cream: 247 245 239;
+    --c-accent: 184 80 66;
+    --c-accent-light: 210 120 100;
+    --c-accent-dark: 150 60 48;
+  }
+
+  html[data-variant='marrakech'] {
+    --c-copper: 217 169 65;
+    --c-copper-light: 240 200 104;
+    --c-copper-dark: 166 125 38;
+    --c-forest: 42 52 51;
+    --c-forest-dark: 27 36 35;
+    --c-forest-darker: 17 24 23;
+    --c-forest-light: 61 76 73;
+    --c-sand: 236 225 200;
+    --c-sand-light: 246 240 223;
+    --c-sand-dark: 200 184 148;
+    --c-gold: 217 169 65;
+    --c-cream: 242 236 221;
+    --c-accent: 184 80 66;
+    --c-accent-light: 210 120 100;
+    --c-accent-dark: 150 60 48;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-cream text-forest-dark font-sans antialiased;
+  }
+  html.dark body {
+    @apply bg-forest-darker text-sand-light;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  html[lang='ar'] h1,
+  html[lang='ar'] h2,
+  html[lang='ar'] h3 {
+    font-family: var(--font-arabic, 'Amiri', 'Playfair Display', Georgia, serif);
+  }
+  select option {
+    color: rgb(var(--c-forest-dark));
+    background-color: #ffffff;
+  }
+  html.dark select option {
+    color: rgb(var(--c-sand-light));
+    background-color: rgb(var(--c-forest-dark));
+  }
+  html.dark select.input {
+    background-color: rgb(var(--c-forest-dark));
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-copper-gradient text-white shadow-glow hover:-translate-y-0.5 hover:brightness-110;
+  }
+  .btn-outline {
+    @apply btn border border-copper/40 text-copper hover:bg-copper/10;
+  }
+  html.dark .btn-outline {
+    @apply text-copper-light;
+  }
+  .btn-ghost {
+    @apply btn text-forest-dark hover:bg-forest-dark/5;
+  }
+  html.dark .btn-ghost {
+    @apply text-sand-light hover:bg-white/5;
+  }
+  .card {
+    @apply rounded-3xl bg-white shadow-card ring-1 ring-forest-dark/5;
+  }
+  html.dark .card {
+    @apply bg-forest-dark ring-white/5;
+  }
+  .input {
+    @apply w-full rounded-xl border border-forest-dark/15 bg-white px-4 py-3 text-sm text-forest-dark placeholder-forest-dark/40 outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/30;
+  }
+  html.dark .input {
+    @apply border-white/10 bg-white/5 text-sand-light placeholder-sand-dark/50;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-forest-dark/60;
+  }
+  html.dark .label {
+    @apply text-sand-dark;
+  }
+  .section-title {
+    @apply text-center;
+  }
+  .section-title h2 {
+    @apply text-3xl font-semibold text-forest-dark sm:text-4xl;
+  }
+  html.dark .section-title h2 {
+    @apply text-sand-light;
+  }
+  .section-title p {
+    @apply mx-auto mt-3 max-w-2xl text-forest-dark/60;
+  }
+  html.dark .section-title p {
+    @apply text-sand-dark;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium;
+  }
+  .btn-terracotta {
+    @apply btn bg-terracotta text-white shadow-lg hover:-translate-y-0.5 hover:brightness-110;
+  }
+  .btn-pill-outline {
+    @apply btn border border-white/20 text-white hover:border-white/50;
+  }
+  .glass-panel {
+    background: rgba(250, 250, 249, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+  html.dark .glass-panel {
+    background: rgba(15, 36, 31, 0.72);
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+  }
+  .display-text {
+    font-size: clamp(3rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .display-2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.5em;
+    float: inline-start;
+    line-height: 0.8;
+    margin-inline-end: 0.12em;
+    margin-top: 0.05em;
+    font-weight: 600;
+  }
+  .text-overline-custom {
+    @apply text-terracotta text-[0.65rem] uppercase tracking-[0.2em] font-medium;
+  }
+}
+
+@layer utilities {
+  /* Scroll-reveal animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes imageReveal {
+    from { clip-path: inset(100% 0 0 0); transform: scale(1.08); }
+    to   { clip-path: inset(0 0 0 0); transform: scale(1); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-image {
+    opacity: 0;
+    transform: scale(1.08);
+    clip-path: inset(100% 0 0 0);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-image.visible {
+    opacity: 1;
+    transform: scale(1);
+    clip-path: inset(0 0 0 0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .pattern-star {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><g fill='none' stroke='rgba(255,255,255,0.055)'><rect x='22' y='22' width='56' height='56'/><rect x='22' y='22' width='56' height='56' transform='rotate(45 50 50)'/><circle cx='50' cy='50' r='3'/></g></svg>");
+    background-size: 100px 100px;
+  }
+  .pattern-zellige {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='rgba(255,255,255,0.06)'><path d='M40 8 L72 40 L40 72 L8 40 Z'/><path d='M0 40 L8 40 M72 40 L80 40 M40 0 L40 8 M40 72 L40 80'/><circle cx='40' cy='40' r='2.5'/></g></svg>");
+    background-size: 80px 80px;
+  }
+  .pattern-dunes {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='rgba(255,255,255,0.05)'><path d='M0 10 Q 15 4 30 10 T 60 10 T 90 10 T 120 10'/><path d='M0 30 Q 15 24 30 30 T 60 30 T 90 30 T 120 30'/><path d='M0 50 Q 15 44 30 50 T 60 50 T 90 50 T 120 50'/></g></svg>");
+    background-size: 120px 60px;
+  }
+
+  /* Region-aware hero patterns.
+     The SVG shape is used as a CSS mask; the visible color is supplied by
+     background-color, so the motif adapts to light/dark AND to the active
+     theme variant (the --c-forest-dark token shifts per variant). This keeps
+     the hero legible on the light cream canvas where the white-stroke
+     .pattern-* classes would vanish. */
+  .region-pattern {
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    background-color: rgb(var(--c-forest-dark) / 0.05);
+    transition: background-color 0.6s ease;
+    animation: regionIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  html.dark .region-pattern {
+    background-color: rgb(255 255 255 / 0.05);
+  }
+  /* Slightly stronger inside the thin frame around the photo card */
+  .region-pattern--frame {
+    background-color: rgb(var(--c-forest-dark) / 0.08);
+  }
+  html.dark .region-pattern--frame {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+  @keyframes regionIn {
+    from { opacity: 0; transform: scale(1.06); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .pattern-region-star {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><g fill='none' stroke='%23000' stroke-width='1.4'><rect x='22' y='22' width='56' height='56'/><rect x='22' y='22' width='56' height='56' transform='rotate(45 50 50)'/><circle cx='50' cy='50' r='3'/></g></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><g fill='none' stroke='%23000' stroke-width='1.4'><rect x='22' y='22' width='56' height='56'/><rect x='22' y='22' width='56' height='56' transform='rotate(45 50 50)'/><circle cx='50' cy='50' r='3'/></g></svg>");
+    -webkit-mask-size: 100px 100px;
+    mask-size: 100px 100px;
+  }
+  .pattern-region-zellige {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23000' stroke-width='1.4'><path d='M40 8 L72 40 L40 72 L8 40 Z'/><path d='M0 40 L8 40 M72 40 L80 40 M40 0 L40 8 M40 72 L40 80'/><circle cx='40' cy='40' r='2.5'/></g></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23000' stroke-width='1.4'><path d='M40 8 L72 40 L40 72 L8 40 Z'/><path d='M0 40 L8 40 M72 40 L80 40 M40 0 L40 8 M40 72 L40 80'/><circle cx='40' cy='40' r='2.5'/></g></svg>");
+    -webkit-mask-size: 80px 80px;
+    mask-size: 80px 80px;
+  }
+  .pattern-region-dunes {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='%23000' stroke-width='1.4'><path d='M0 10 Q 15 4 30 10 T 60 10 T 90 10 T 120 10'/><path d='M0 30 Q 15 24 30 30 T 60 30 T 90 30 T 120 30'/><path d='M0 50 Q 15 44 30 50 T 60 50 T 90 50 T 120 50'/></g></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='%23000' stroke-width='1.4'><path d='M0 10 Q 15 4 30 10 T 60 10 T 90 10 T 120 10'/><path d='M0 30 Q 15 24 30 30 T 60 30 T 90 30 T 120 30'/><path d='M0 50 Q 15 44 30 50 T 60 50 T 90 50 T 120 50'/></g></svg>");
+    -webkit-mask-size: 120px 60px;
+    mask-size: 120px 60px;
+  }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    animation: marqueeScroll 42s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.15); }
+    to   { transform: scale(1); }
+  }
+  .kenburns {
+    animation: kenburns 9s ease-out forwards;
+  }
+}
+
+.leaflet-container {
+  @apply font-sans;
+  z-index: 0;
+}
+
+.nice-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: rgba(127, 127, 127, 0.15);
+  border-radius: 9999px;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: rgba(201, 123, 58, 0.5);
+  border-radius: 9999px;
+}

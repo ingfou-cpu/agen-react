@@ -1,0 +1,34 @@
+# Python / Django
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+env/
+
+# Run artifacts
+_server*.log
+_server.err
+_vite.log
+_vite.err
+.playwright-mcp/
+
+# Local TLS dev certs (private key)
+*.pem
+
+# Tooling audit reports
+.impeccable/
+
+# Node / Vite
+node_modules/
+dist/
+*.local
+
+# Tooling / editor
+.agents/
+.claude/
+skills-lock.json
+.idea/
+.vscode/
+.DS_Store
+.aidesigner/*
+!.aidesigner/.gitkeep

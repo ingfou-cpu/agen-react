@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+{% load humanize %}
+
+<style>
+    .nav-pills .nav-link {
+        color: var(--ka-sand-light) !important;
+    }
+    .bg-black .project-text h3 {
+        color: #fff !important;
+    }
+</style>
+
+<br><br><br><br>
+<!-- Project Two Row-->
+<h1 class="display-4 text-primary fw-bold text-center"><center><b><em> {% trans "Circuit Touristique" %} </em></b> </center></h1>
+<br><br><br><br>
+<center><h1 class="display-6 text-primary fw-bold text-center">{% trans "Nos circuits touristiques" %}</h1></center>
+<br><br><br><br>
+{% for pack_travels in pack_travels %}
+<br><br><br><br>
+                <h2 class="display-4 text-primary fw-bold text-center"><center><b><em> {{pack_travels.pack_name}} </em></b> </center></h2>
+                <div class="row gx-0 justify-content-center" data-aos="fade-up">
+                    {% if forloop.counter|divisibleby:2 %}
+                    <!-- Pair : Image à gauche, Description à droite -->
+                    <div class="col-lg-5">
+                        <img class="img-fluid" src="{{pack_travels.image.url}}" alt="..." />
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="bg-black text-center h-100 project">
+                            <div class="d-flex h-100">
+                                <div class="project-text w-100 my-auto text-center text-lg-left">
+                                    <h3 class="text-white">{% trans "Description" %}</h3>
+                                    <p class="mb-0 text-white-50">{{pack_travels.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <!-- Impaire : Description à gauche, Image à droite -->
+                    <div class="col-lg-5">
+                        <div class="bg-black text-center h-100 project">
+                            <div class="d-flex h-100">
+                                <div class="project-text w-100 my-auto text-center text-lg-right">
+                                    <h3 class="text-white">{% trans "Description" %}</h3>
+                                    <p class="mb-0 text-white-50">{{pack_travels.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <img class="img-fluid" src="{{pack_travels.image.url}}" alt="..." />
+                    </div>
+                    <br><br><br><br><br><br><br><br>
+                    {% endif %}
+                </div>
+                <br><br><br><br>
+<br><br>
+<div class="d-grid gap-2">
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#dev-content-{{ forloop.counter }}" aria-expanded="false" aria-controls="dev-content-{{ forloop.counter }}" id="btn-dev-{{ forloop.counter }}">{% trans "Détails du circuit" %}</button>
+</div>
+
+<div class="collapse" id="dev-content-{{ forloop.counter }}">
+    <br><br>
+    <center><div class="col-lg-6"><img class="img-fluid" style="background-color: ivory;" src="{{pack_travels.image_circuit.url}}" alt="..." /></div></center>
+    <center><h4 class="fw-bold">{{pack_travels.pack_name}}</h4></center>
+    <br><br><br><br><br>
+            <div class="text-center mb-5">
+                <a href="{% url 'circuitChoisi' pack_travels.id %}" class="btn btn-success btn-lg">
+                <i class="fas fa-check-circle me-2"></i>{% trans "Choisir ce circuit" %} </a>
+            </div>
+    <center><h1 class="display-6 text-primary fw-bold text-center">{% trans "Informations diverses" %}</h1></center>
+    <br>
+    <!-- ===== PILLS NAVIGATION ===== -->
+    <div class="d-flex justify-content-center">
+        <ul class="nav nav-pills mb-3" id="pills-tab-{{ forloop.counter }}" role="tablist" data-aos="fade-up">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-itineraire-{{ forloop.counter }}-tab" data-bs-toggle="pill" data-bs-target="#pills-itineraire-{{ forloop.counter }}" type="button" role="tab" aria-controls="pills-itineraire-{{ forloop.counter }}"                     aria-selected="false">{% trans "Itinéraire" %}</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-prix-dates-{{ forloop.counter }}-tab" data-bs-toggle="pill" data-bs-target="#pills-prix-dates-{{ forloop.counter }}" type="button" role="tab" aria-controls="pills-prix-dates-{{ forloop.counter }}"                     aria-selected="false">{% trans "Prix & Dates" %}</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-fiche-technique-{{ forloop.counter }}-tab" data-bs-toggle="pill" data-bs-target="#pills-fiche-technique-{{ forloop.counter }}" type="button" role="tab" aria-controls="pills-fiche-technique-{{ forloop.counter }}"                     aria-selected="true">{% trans "Fiche technique" %}</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-nos-engagements-{{ forloop.counter }}-tab" data-bs-toggle="pill" data-bs-target="#pills-nos-engagements-{{ forloop.counter }}" type="button" role="tab" aria-controls="pills-nos-engagements-{{ forloop.counter }}"                     aria-selected="false">{% trans "Nos engagements" %}</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ===== PILLS CONTENT ===== -->
+    <div class="tab-content col-lg-10 mx-auto" id="pills-tabContent-{{ forloop.counter }}">
+
+        <!-- Itinéraire Tab Content -->
+        <div class="tab-pane fade" id="pills-itineraire-{{ forloop.counter }}" role="tabpanel" aria-labelledby="pills-itineraire-{{ forloop.counter }}-tab">
+            <h3 class="mb-4 text-center">{% trans "Itinéraire" %}</h3>
+            <p class="mb-4 text-muted text-center">{{ pack_travels.itinerary|linebreaksbr }}</p>
+        </div>
+
+        <!-- Prix & Dates Tab Content -->
+        <div class="tab-pane fade" id="pills-prix-dates-{{ forloop.counter }}" role="tabpanel" aria-labelledby="pills-prix-dates-{{ forloop.counter }}-tab">
+            <h3 class="text-center">{% trans "Dates disponibles et prix par personne" %}</h3>
+            <table class="table table-bordered mt-3" style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="width: 50.00%;">{% trans "Prix" %}</th>
+                        <th style="width: 50.00%;">{% trans "Dates" %}</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{pack_travels.price |intcomma  }} DA</td>
+                        <td>{% blocktrans with date=pack_travels.date|date:"d/m/Y" %}à partir du {{ date }}{% endblocktrans %}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="mt-4">{% trans "Ce qui est inclus dans le prix" %}</h3>
+            <ul class="text-muted">
+                <li>{% trans "Accueil et prise en charge à l'aéroport de Djanet par un guide professionnel Touareg expérimenté et ayant une connaissance parfaite du terrain." %}</li>
+                <li>{% trans "Frais d'entrée pour les parcs nationaux et les sites protégés." %}</li>
+                <li>{% trans "Ânes tout le long du parcours." %}</li>
+                <li>{% trans "Utilisation de véhicules tout-terrain 4×4 pour les grands déplacements." %}</li>
+                <li>{% trans "Quatre repas par jour lors des bivouacs, comprenant le petit-déjeuner, le déjeuner, le goûter et le dîner." %}</li>
+                <li>{% trans "Fourniture d'eau, de thé et soft pendant toute la durée du voyage." %}</li>
+                <li>{% trans "Présence d'un cuisinier pendant toute la durée du séjour." %}</li>
+                <li>{% trans "Mise à disposition de matériel de bivouac, incluant des tentes, des matelas et des couvertures." %}</li>
+                <li>{% trans "Assistance à l'obtention du visa de régularisation." %}</li>
+            </ul>
+            <h3 class="mt-4">{% trans "Ce qui n'est pas inclus dans le prix" %}</h3>
+            <ul class="text-muted">
+                <li>{% trans "Les frais de transport aérien pour se rendre à Djanet." %}</li>
+                <li>{% trans "Assurance voyage pour couvrir d'éventuels incidents pendant le séjour." %}</li>
+                <li>{% trans "Dépenses personnelles et éventuels pourboires pour le personnel." %}</li>
+                <li>{% trans "Les frais de visa." %}</li>
+            </ul>
+        </div>
+
+        <!-- Fiche Technique Tab Content (actif par défaut) -->
+        <div class="tab-pane fade show active" id="pills-fiche-technique-{{ forloop.counter }}" role="tabpanel" aria-labelledby="pills-fiche-technique-{{ forloop.counter }}-tab">
+            <h3 class="text-center">{% trans "Fiche Technique" %}</h3>
+            <p class="text-muted">{{ pack_travels.fiche_technique|linebreaksbr }}</p>
+        </div>
+
+        <!-- Nos Engagements Tab Content -->
+        <div class="tab-pane fade" id="pills-nos-engagements-{{ forloop.counter }}" role="tabpanel" aria-labelledby="pills-nos-engagements-{{ forloop.counter }}-tab">
+            <h3 class="text-center">{% trans "Nos Engagements" %}</h3>
+            <p class="text-muted text-center">{% trans "Notre partenaire s'engage sur cinq points :" %}</p>
+            <ul class="text-muted mx-auto" style="list-style-position: inside; display: inline-block; text-align: left;">
+                <li>{% trans "Un guide professionnel et expérimenté." %}</li>
+                <li>{% trans "Un accompagnement personnalisé." %}</li>
+                <li>{% trans "Un matériel de qualité." %}</li>
+                <li>{% trans "Un service de restauration de qualité." %}</li>
+                <li>{% trans "Une assistance médicale." %}</li>
+            </ul>
+        </div>
+
+        <!-- Galerie Photos Tab Content -->
+    </div>
+
+</div>
+
+<br><br><br><br>
+{% endfor %}
+<br><br><br><br>
+{% endblock %}

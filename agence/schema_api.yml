@@ -1,0 +1,2536 @@
+openapi: 3.0.3
+info:
+  title: Mon API Django
+  version: 1.0.0
+  description: Documentation extraite de mon projet existant
+paths:
+  /api/blog-comments/:
+    get:
+      operationId: blog_comments_list
+      tags:
+      - blog-comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogComment'
+          description: ''
+    post:
+      operationId: blog_comments_create
+      tags:
+      - blog-comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogComment'
+          description: ''
+  /api/blog-comments/{id}/:
+    get:
+      operationId: blog_comments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Commentaire.
+        required: true
+      tags:
+      - blog-comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogComment'
+          description: ''
+    put:
+      operationId: blog_comments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Commentaire.
+        required: true
+      tags:
+      - blog-comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogComment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogComment'
+          description: ''
+    patch:
+      operationId: blog_comments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Commentaire.
+        required: true
+      tags:
+      - blog-comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogComment'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogComment'
+          description: ''
+    delete:
+      operationId: blog_comments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Commentaire.
+        required: true
+      tags:
+      - blog-comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/blog-posts/:
+    get:
+      operationId: blog_posts_list
+      tags:
+      - blog-posts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogPost'
+          description: ''
+    post:
+      operationId: blog_posts_create
+      tags:
+      - blog-posts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+  /api/blog-posts/{id}/:
+    get:
+      operationId: blog_posts_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Article.
+        required: true
+      tags:
+      - blog-posts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    put:
+      operationId: blog_posts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Article.
+        required: true
+      tags:
+      - blog-posts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    patch:
+      operationId: blog_posts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Article.
+        required: true
+      tags:
+      - blog-posts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    delete:
+      operationId: blog_posts_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Article.
+        required: true
+      tags:
+      - blog-posts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/bookings/:
+    get:
+      operationId: bookings_list
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+          description: ''
+    post:
+      operationId: bookings_create
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+  /api/bookings/{id}/:
+    get:
+      operationId: bookings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Réservation.
+        required: true
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    put:
+      operationId: bookings_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Réservation.
+        required: true
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    patch:
+      operationId: bookings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Réservation.
+        required: true
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    delete:
+      operationId: bookings_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Réservation.
+        required: true
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/contacts/:
+    get:
+      operationId: contacts_list
+      tags:
+      - contacts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+          description: ''
+    post:
+      operationId: contacts_create
+      tags:
+      - contacts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+  /api/contacts/{id}/:
+    get:
+      operationId: contacts_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) contact.
+        required: true
+      tags:
+      - contacts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+    put:
+      operationId: contacts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) contact.
+        required: true
+      tags:
+      - contacts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+    patch:
+      operationId: contacts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) contact.
+        required: true
+      tags:
+      - contacts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContact'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedContact'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedContact'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+    delete:
+      operationId: contacts_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) contact.
+        required: true
+      tags:
+      - contacts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/destinations/:
+    get:
+      operationId: destinations_list
+      tags:
+      - destinations
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+          description: ''
+    post:
+      operationId: destinations_create
+      tags:
+      - destinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Destination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Destination'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+          description: ''
+  /api/destinations/{id}/:
+    get:
+      operationId: destinations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) destination.
+        required: true
+      tags:
+      - destinations
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+          description: ''
+    put:
+      operationId: destinations_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) destination.
+        required: true
+      tags:
+      - destinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Destination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Destination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Destination'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+          description: ''
+    patch:
+      operationId: destinations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) destination.
+        required: true
+      tags:
+      - destinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDestination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDestination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDestination'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+          description: ''
+    delete:
+      operationId: destinations_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) destination.
+        required: true
+      tags:
+      - destinations
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/hotels/:
+    get:
+      operationId: hotels_list
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hotel'
+          description: ''
+    post:
+      operationId: hotels_create
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+          description: ''
+  /api/hotels/{id}/:
+    get:
+      operationId: hotels_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) hotel.
+        required: true
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+          description: ''
+    put:
+      operationId: hotels_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) hotel.
+        required: true
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+          description: ''
+    patch:
+      operationId: hotels_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) hotel.
+        required: true
+      tags:
+      - hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedHotel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedHotel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedHotel'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+          description: ''
+    delete:
+      operationId: hotels_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) hotel.
+        required: true
+      tags:
+      - hotels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/newsletter-subscribers/:
+    get:
+      operationId: newsletter_subscribers_list
+      tags:
+      - newsletter-subscribers
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NewsletterSubscriber'
+          description: ''
+    post:
+      operationId: newsletter_subscribers_create
+      tags:
+      - newsletter-subscribers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterSubscriber'
+          description: ''
+  /api/newsletter-subscribers/{id}/:
+    get:
+      operationId: newsletter_subscribers_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Abonné.
+        required: true
+      tags:
+      - newsletter-subscribers
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterSubscriber'
+          description: ''
+    put:
+      operationId: newsletter_subscribers_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Abonné.
+        required: true
+      tags:
+      - newsletter-subscribers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriber'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterSubscriber'
+          description: ''
+    patch:
+      operationId: newsletter_subscribers_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Abonné.
+        required: true
+      tags:
+      - newsletter-subscribers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedNewsletterSubscriber'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedNewsletterSubscriber'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedNewsletterSubscriber'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterSubscriber'
+          description: ''
+    delete:
+      operationId: newsletter_subscribers_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Abonné.
+        required: true
+      tags:
+      - newsletter-subscribers
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/packs/:
+    get:
+      operationId: packs_list
+      tags:
+      - packs
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PackTravel'
+          description: ''
+    post:
+      operationId: packs_create
+      tags:
+      - packs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackTravel'
+          description: ''
+  /api/packs/{id}/:
+    get:
+      operationId: packs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) pack_travel.
+        required: true
+      tags:
+      - packs
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackTravel'
+          description: ''
+    put:
+      operationId: packs_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) pack_travel.
+        required: true
+      tags:
+      - packs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PackTravel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackTravel'
+          description: ''
+    patch:
+      operationId: packs_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) pack_travel.
+        required: true
+      tags:
+      - packs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPackTravel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPackTravel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPackTravel'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackTravel'
+          description: ''
+    delete:
+      operationId: packs_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) pack_travel.
+        required: true
+      tags:
+      - packs
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/payment-records/:
+    get:
+      operationId: payment_records_list
+      tags:
+      - payment-records
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentRecord'
+          description: ''
+    post:
+      operationId: payment_records_create
+      tags:
+      - payment-records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecord'
+          description: ''
+  /api/payment-records/{id}/:
+    get:
+      operationId: payment_records_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Paiement.
+        required: true
+      tags:
+      - payment-records
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecord'
+          description: ''
+    put:
+      operationId: payment_records_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Paiement.
+        required: true
+      tags:
+      - payment-records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRecord'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecord'
+          description: ''
+    patch:
+      operationId: payment_records_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Paiement.
+        required: true
+      tags:
+      - payment-records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPaymentRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPaymentRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPaymentRecord'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecord'
+          description: ''
+    delete:
+      operationId: payment_records_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) Paiement.
+        required: true
+      tags:
+      - payment-records
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/reser-circuits/:
+    get:
+      operationId: reser_circuits_list
+      tags:
+      - reser-circuits
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReserCircuit'
+          description: ''
+    post:
+      operationId: reser_circuits_create
+      tags:
+      - reser-circuits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReserCircuit'
+          description: ''
+  /api/reser-circuits/{id}/:
+    get:
+      operationId: reser_circuits_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) reser_circuit.
+        required: true
+      tags:
+      - reser-circuits
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReserCircuit'
+          description: ''
+    put:
+      operationId: reser_circuits_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) reser_circuit.
+        required: true
+      tags:
+      - reser-circuits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReserCircuit'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReserCircuit'
+          description: ''
+    patch:
+      operationId: reser_circuits_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) reser_circuit.
+        required: true
+      tags:
+      - reser-circuits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReserCircuit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReserCircuit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReserCircuit'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReserCircuit'
+          description: ''
+    delete:
+      operationId: reser_circuits_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) reser_circuit.
+        required: true
+      tags:
+      - reser-circuits
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/testimonials/:
+    get:
+      operationId: testimonials_list
+      tags:
+      - testimonials
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Testimonial'
+          description: ''
+    post:
+      operationId: testimonials_create
+      tags:
+      - testimonials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+          description: ''
+  /api/testimonials/{id}/:
+    get:
+      operationId: testimonials_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) testimonial.
+        required: true
+      tags:
+      - testimonials
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+          description: ''
+    put:
+      operationId: testimonials_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) testimonial.
+        required: true
+      tags:
+      - testimonials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Testimonial'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+          description: ''
+    patch:
+      operationId: testimonials_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) testimonial.
+        required: true
+      tags:
+      - testimonials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTestimonial'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTestimonial'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTestimonial'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+          description: ''
+    delete:
+      operationId: testimonials_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Un(une) valeur entière unique identifiant ce(cette) testimonial.
+        required: true
+      tags:
+      - testimonials
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    BlankEnum:
+      enum:
+      - ''
+    BlogComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        author:
+          type: string
+          maxLength: 80
+        email:
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        body:
+          type: string
+          maxLength: 1000
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        post:
+          type: integer
+      required:
+      - author
+      - body
+      - created_at
+      - id
+      - post
+    BlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        slug:
+          oneOf:
+          - type: string
+            maxLength: 200
+            pattern: ^[-a-zA-Z0-9_]+$
+          - type: string
+            maxLength: 0
+        author:
+          type: string
+          maxLength: 100
+        excerpt:
+          type: string
+          maxLength: 300
+        content:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        published:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        destination:
+          type: integer
+          nullable: true
+      required:
+      - content
+      - created_at
+      - excerpt
+      - id
+      - title
+      - updated_at
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        check_in_date:
+          type: string
+          format: date-time
+          readOnly: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        check_out_date:
+          type: string
+          format: date-time
+          nullable: true
+        means_of_transport:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/MeansOfTransportEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        hotel:
+          type: integer
+          nullable: true
+        destination:
+          type: integer
+      required:
+      - check_in_date
+      - customer_name
+      - destination
+      - id
+    CalificationStarsEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: |-
+        * `1` - 1
+        * `2` - 2
+        * `3` - 3
+        * `4` - 4
+        * `5` - 5
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        phone:
+          type: string
+          nullable: true
+          maxLength: 20
+        message:
+          type: string
+        sent_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - id
+      - name
+      - sent_at
+    Destination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        city_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      required:
+      - city_name
+      - id
+    Hotel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        hotel_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        calification_stars:
+          allOf:
+          - $ref: '#/components/schemas/CalificationStarsEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        reservation_link:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 200
+          - type: string
+            maxLength: 0
+        image:
+          type: string
+          format: uri
+          nullable: true
+        status:
+          type: boolean
+        destination:
+          type: integer
+      required:
+      - calification_stars
+      - destination
+      - hotel_name
+      - id
+      - price
+    MeansOfTransportEnum:
+      enum:
+      - avion
+      - train
+      - bus
+      - voiture
+      type: string
+      description: |-
+        * `avion` - Avion
+        * `train` - Train
+        * `bus` - Bus
+        * `voiture` - Voiture de location
+    NewsletterSubscriber:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        subscribed_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+      required:
+      - email
+      - id
+      - subscribed_at
+    NullEnum:
+      enum:
+      - null
+    PackTravel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pack_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        image_circuit:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        galerie_photos:
+          type: string
+          format: uri
+          nullable: true
+        itinerary:
+          type: string
+        date:
+          type: string
+          format: date
+          nullable: true
+        fiche_technique:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      required:
+      - id
+      - pack_name
+      - price
+    PatchedBlogComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        author:
+          type: string
+          maxLength: 80
+        email:
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        body:
+          type: string
+          maxLength: 1000
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        post:
+          type: integer
+    PatchedBlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        slug:
+          oneOf:
+          - type: string
+            maxLength: 200
+            pattern: ^[-a-zA-Z0-9_]+$
+          - type: string
+            maxLength: 0
+        author:
+          type: string
+          maxLength: 100
+        excerpt:
+          type: string
+          maxLength: 300
+        content:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        published:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        destination:
+          type: integer
+          nullable: true
+    PatchedBooking:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        check_in_date:
+          type: string
+          format: date-time
+          readOnly: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        check_out_date:
+          type: string
+          format: date-time
+          nullable: true
+        means_of_transport:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/MeansOfTransportEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        hotel:
+          type: integer
+          nullable: true
+        destination:
+          type: integer
+    PatchedContact:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        phone:
+          type: string
+          nullable: true
+          maxLength: 20
+        message:
+          type: string
+        sent_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDestination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        city_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    PatchedHotel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        hotel_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        calification_stars:
+          allOf:
+          - $ref: '#/components/schemas/CalificationStarsEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        reservation_link:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 200
+          - type: string
+            maxLength: 0
+        image:
+          type: string
+          format: uri
+          nullable: true
+        status:
+          type: boolean
+        destination:
+          type: integer
+    PatchedNewsletterSubscriber:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        subscribed_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+    PatchedPackTravel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pack_name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        image_circuit:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        galerie_photos:
+          type: string
+          format: uri
+          nullable: true
+        itinerary:
+          type: string
+        date:
+          type: string
+          format: date
+          nullable: true
+        fiche_technique:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    PatchedPaymentRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        stripe_checkout_session_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        stripe_payment_intent_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        stripe_customer_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        currency:
+          type: string
+          maxLength: 3
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        customer_phone:
+          type: string
+          maxLength: 20
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          nullable: true
+        booking:
+          type: integer
+          nullable: true
+        reser_circuit:
+          type: integer
+          nullable: true
+        destination:
+          type: integer
+          nullable: true
+        pack:
+          type: integer
+          nullable: true
+    PatchedReserCircuit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        pack_travel:
+          type: integer
+    PatchedTestimonial:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rating:
+          allOf:
+          - $ref: '#/components/schemas/RatingEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        comment:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        customer_name:
+          type: integer
+        destination:
+          type: integer
+    PaymentRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        stripe_checkout_session_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        stripe_payment_intent_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        stripe_customer_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        currency:
+          type: string
+          maxLength: 3
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        customer_phone:
+          type: string
+          maxLength: 20
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          nullable: true
+        booking:
+          type: integer
+          nullable: true
+        reser_circuit:
+          type: integer
+          nullable: true
+        destination:
+          type: integer
+          nullable: true
+        pack:
+          type: integer
+          nullable: true
+      required:
+      - created_at
+      - id
+      - updated_at
+    RatingEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: |-
+        * `1` - 1
+        * `2` - 2
+        * `3` - 3
+        * `4` - 4
+        * `5` - 5
+    ReserCircuit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        customer_name:
+          type: string
+          maxLength: 100
+        customer_email:
+          nullable: true
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        pack_travel:
+          type: integer
+      required:
+      - customer_name
+      - id
+      - pack_travel
+    StatusEnum:
+      enum:
+      - pending
+      - completed
+      - failed
+      - refunded
+      - expired
+      type: string
+      description: |-
+        * `pending` - En attente
+        * `completed` - Complété
+        * `failed` - Échoué
+        * `refunded` - Remboursé
+        * `expired` - Expiré
+    Testimonial:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rating:
+          allOf:
+          - $ref: '#/components/schemas/RatingEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        comment:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        customer_name:
+          type: integer
+        destination:
+          type: integer
+      required:
+      - created_at
+      - customer_name
+      - destination
+      - id
+      - rating
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

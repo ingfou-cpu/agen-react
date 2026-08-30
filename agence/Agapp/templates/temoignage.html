@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %} 
+<br><br><br><br><br>
+
+<section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5">
+                 <!-- Featured Project Row-->
+                                  
+                 {% if messages %}
+                {% for message in messages %}
+                                <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                 <h1><center><b><em> {% trans "Avis de voyage" %} </em></b> </center></h1>
+                <!-- {{ Destination }}-->
+                {% for testimonials in Testimonial %} 
+                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+
+                    {% if forloop.counter|divisibleby:2 %}
+                        <!-- Pair : Texte à gauche, Image à droite -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="featured-text text-center text-lg-left">
+                                <h4>{{testimonials.destination}}</h4>
+                                <p>{% trans "Note" %} : {{ testimonials.rating }}/5</p>
+                                <p>{% trans "Client" %} : {{ testimonials.customer_name }}</p>
+                                <p class="text-black-50 mb-0">{% trans "Commentaire" %} : {{testimonials.comment}}</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-7"><img class="img-fluid" src="{{testimonials.destination.image.url}}" alt="..." /></div>
+                    
+                    {% else %}
+                        <!-- Impair : Image à gauche, Texte à droite -->
+                        <div class="col-xl-8 col-lg-7"><img class="img-fluid" src="{{testimonials.destination.image.url}}" alt="..." /></div>
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="featured-text text-center text-lg-left">
+                                <h4>{{testimonials.destination}}</h4>
+                                <p>{% trans "Note" %} : {{ testimonials.rating }}/5</p>
+                                <p>{% trans "Client" %} : {{ testimonials.customer_name }} </p>
+
+                                <p class="text-black-50 mb-0">{% trans "Commentaire" %} : {{testimonials.comment}}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                {% endfor %}
+            <div class="container px-4 px-lg-5 d-flex justify-content-center">
+                
+                {% if page_obj.has_previous %}
+                    <a href="?page=1"> {% trans "Première" %} -&nbsp; </a><br><br> 
+                    <a href="?page={{ page_obj.previous_page_number }}"> {% trans "Précédente" %} </a>
+                {% endif %}
+                    &nbsp;&nbsp;&nbsp;
+                <span>  {% trans "Page" %} {{ page_obj.number }} /&nbsp;{{ page_obj.paginator.num_pages }}  </span>
+                    &nbsp;&nbsp;&nbsp;
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"> {% trans "Suivante" %} -&nbsp; </a><br><br> 
+                    <a href="?page={{ page_obj.paginator.num_pages }}"> {% trans "Dernière" %} </a>
+                {% endif %}
+            </div>   
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}   

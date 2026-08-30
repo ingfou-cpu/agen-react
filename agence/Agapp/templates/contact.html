@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %} 
+
+<section class="signup-section" id="signup">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success">{{ message }}</div>
+                            {% endfor %}
+                            {% endif %}
+                        <em><h2 class="text-white mb-5">{% trans "Inscrivez-vous pour recevoir nos dernières nouvelles en premier !" %}</h2> </em>
+                        {% if submitted %}
+                            <h3>{% trans "Merci pour votre message !" %}</h3>
+                            <p>{% trans "Nous vous répondrons dès que possible." %}</p>
+                        {%  else %}
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <fieldset>
+                                    <legend>{% trans "Contactez-nous" %}</legend>
+                                    {{ form.as_p }} 
+                                <button type="submit" class="btn btn-primary">{% trans "Envoyer" %}</button>
+                            </fieldset>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
+
+

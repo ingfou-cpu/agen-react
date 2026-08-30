@@ -1,0 +1,10 @@
+django
+django-rest-framework
+requests
+django-cors-headers
+dotenv
+Pillow
+stripe
+polib
+drf-spectacular
+drf-spectacular-sidecar
